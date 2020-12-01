@@ -488,3 +488,27 @@ proyecto_v2 SUT(
     cambio_coef_i=1;
 #10
     cambio_coef_i=0;
+
+
+
+
+
+
+if(ready)begin
+    m <= data_in;
+    m1<=m;
+    m2<=m1;
+    m3<=m2;
+    m4<=m3;
+    m5<=m4;
+    m6<=m5;
+    m7<=m6;
+    m8<=m7;
+    m9<=m8;
+    m10<=m9;
+    m11<=m10;
+    m12<=m11;
+    m13<=m12;
+    m14<=m13;
+    m15<=m14;                   
+end

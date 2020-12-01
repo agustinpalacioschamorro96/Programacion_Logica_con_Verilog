@@ -82,10 +82,10 @@ datosTotales = [coefEnv_int, datosEnv_int']  % concatena coeficientes con datos
 
 
 % Se crea un objeto s tipo puerto serie
-s = serial('/dev/tty1'); % Puerto
+s = serial('com5'); % Puerto
 s.Baudrate = 115200 ;    % Velocidad
 s.StopBits=1;            % Bits de stop
-s.Parity='odd';          % Paridad
+s.Parity='even';          % Paridad
 s.ByteOrder = 'littleEndian';   
 % Ejemplo de casos de ByteOrder:
 % Hexadecimal value 4F52 is to be stored in device memory. 
@@ -96,7 +96,7 @@ s.ByteOrder = 'littleEndian';
 fopen(s)
 
 
-% EnvÃ­a todos los datos, los formatea como int16 (agrupa de a dos bytes)
+% Envía todos los datos, los formatea como int16 (agrupa de a dos bytes)
 fwrite(s, datosTotales, 'int16')
 
 fclose(s)

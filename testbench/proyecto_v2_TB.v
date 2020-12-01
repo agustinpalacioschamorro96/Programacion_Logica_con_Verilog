@@ -117,7 +117,8 @@ initial begin
         coef_in=-  12'd99;        //Coef 15
         cambio_coef_i=1;                  
     #5    
-    //Nunca se activó el fin_block_coef_o
+    #10    
+    //la escritura de la fifo estÃ¡ activada desde un comienzo, multiplexar la escritura de la fifo entre 0 y ready, primer idea para escrbir 
 $finish;
 end
 endmodule

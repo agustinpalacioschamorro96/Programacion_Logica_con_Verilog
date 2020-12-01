@@ -8,7 +8,9 @@ instrreset  % Borra y reinicia todos los puertos, evita problemas cuando no se c
 
 x = zeros(800,1); 
 
-s = serial('/dev/ttyUSB1','BaudRate',115200,'InputBufferSize',800);
+s = serial('com5','BaudRate',115200,'InputBufferSize',800);
+s.Parity='even';          % Paridad
+s.ByteOrder = 'littleEndian';
 
 % Crea un una variable tipo puerto
 %   '/dev/ttyUSB1' indica el puerto, se reemplaza por COM1, COM2...

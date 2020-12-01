@@ -87,9 +87,9 @@ module block_coef(
                     16 : coef15_aux=coef_in;
                    // default: count=0;                
                     endcase   
-                end
-                fin_block_coef = (count == 16 )? 1 : 0 ;                           
-            end               
+                end                                          
+            end
+             fin_block_coef = (count == 16 )? 1 : 0 ;               
         end     
     end
     
