@@ -5,6 +5,7 @@ module FIR(
         input clk,
         input rst,
         input en_fir,
+        input ready,
         input [11:0] coef0,
         input [11:0] coef1,
         input [11:0] coef2,
@@ -108,29 +109,26 @@ module FIR(
             
         end else begin
             if (en_fir) begin
-                case(count_sample)
-                    0:  m <= data_in;
-                    1:  m1<=m;
-                    2:  m2<=m1;
-                    3:  m3<=m2;
-                    4:  m4<=m3;
-                    5:  m5<=m4;
-                    6:  m6<=m5;
-                    7:  m7<=m6;
-                    8:  m8<=m7;
-                    9:  m9<=m8;
-                    10: m10<=m9;
-                    11: m11<=m10;
-                    12: m12<=m11;
-                    13: m13<=m12;
-                    14: m14<=m13;
-                    15: begin 
-                            m15<=m14;
-                            full<=1;
-                        end
-                    default: full = 1;                    
-                endcase                
-                count_sample <= (count_sample == 15) ? 0 : (count_sample + 1) ; 
+                if(ready)begin
+                    m <= data_in;
+                    m1<=m;
+                    m2<=m1;
+                    m3<=m2;
+                    m4<=m3;
+                    m5<=m4;
+                    m6<=m5;
+                    m7<=m6;
+                    m8<=m7;
+                    m9<=m8;
+                    m10<=m9;
+                    m11<=m10;
+                    m12<=m11;
+                    m13<=m12;
+                    m14<=m13;
+                    m15<=m14;  
+                    count_sample <=  (count_sample + 1) ;
+                    full <=  (count_sample < 15) ? 1 : 0 ;          
+                end
                 if (full) begin
                     resp   <= coef0   * m ;
                     resp1  <= coef1   * m1;
@@ -153,5 +151,7 @@ module FIR(
                 end    
             end
         end
+    end
+    always@(posedge ready)begin
     end
 endmodule

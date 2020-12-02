@@ -17,7 +17,7 @@ fopen(s)
 
 
 % Envía todos los datos, los formatea como int16 (agrupa de a dos bytes)
-fwrite(s, 28781)
+fwrite(s, 854)
 %fwrite(s, ['m'],'int16')
-out = fscanf(s)
+%out = fscanf(s)
 fclose(s)
