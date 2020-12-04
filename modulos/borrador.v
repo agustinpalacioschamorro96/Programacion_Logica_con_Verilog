@@ -512,3 +512,39 @@ if(ready)begin
     m14<=m13;
     m15<=m14;                   
 end
+
+.clk_i(clk_i),
+.rst_i(rst_i),
+.dato_rx_i(dato_rx_i),
+.dato_listou_i(dato_listou_i),
+.led_o(led_o),
+.coef_o(coef_o)
+
+
+
+ADC_V2 M1 (
+.clk_78MHz_i(clk_78MHz_i),
+.rst_i(rst_i),
+.data_o(data_o),
+.(ready_o)
+);
+
+clocks(
+.clk_100MHz_i(clk_100MHz_i),
+.rst_i(rst_i),
+.clk_78MHz_o(clk_78MHz_o)
+);
+
+module top (
+        input clk_100MHz_i,
+        input rst_i,
+        output [15:0] data_o,  
+        output ready_o     
+);
+
+top SUT (
+    .clk_100MHz_i(clk_100MHz_i),    
+    .rst_i(rst_i),    
+    .data_o(data_o),    
+    .ready_o(ready_o)   
+);

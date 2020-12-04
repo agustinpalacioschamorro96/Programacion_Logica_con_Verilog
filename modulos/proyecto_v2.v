@@ -128,5 +128,15 @@ module proyecto_v2(
                    .full(full_fifo_int),   // output wire full
                    .empty(empty_int)       // output wire empty
      ); 
+
+          ADC SUT5( 
+               .clk_100MHz_i(clk_100MHz_i), 
+               .rst_i(rst_i),
+               .locked_o(locked_o),
+               .data_o(data_o),
+               .eoc_o(eoc_o),
+               .clk_78MHz_o(clk_78MHz_o),
+               .ready_o(ready_o),
+     );  
         
 endmodule
