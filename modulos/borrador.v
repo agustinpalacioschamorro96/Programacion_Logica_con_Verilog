@@ -548,3 +548,292 @@ top SUT (
     .data_o(data_o),    
     .ready_o(ready_o)   
 );
+
+
+
+    block_coef SUT3 (
+                    .coef_in(coef_in),
+                    .clk(clk_uart_int),
+                    .rst(rst),
+                    .pulsador_carga_coef_i(pulsador_carga_coef_i),
+                    .en_recepcion_i(en_recepcion_int),
+                    .cambio_coef_i(cambio_coef_i),
+                    .fin_block_coef_o(fin_block_coef_int),
+                    .coef0(coef0 ),
+                    .coef1(coef1 ),
+                    .coef2(coef2 ),
+                    .coef3(coef3 ),
+                    .coef4(coef4 ),
+                    .coef5(coef5 ),
+                    .coef6(coef6 ),
+                    .coef7(coef7 ),
+                    .coef8(coef8 ),
+                    .coef9(coef9 ),
+                    .coef10(coef10),
+                    .coef11(coef11),
+                    .coef12(coef12),
+                    .coef13(coef13),
+                    .coef14(coef14),
+                    .coef15(coef15));
+
+
+reg clk_100MHz_i;
+reg rst_i;
+reg pulsador_carga_coef_i;
+reg send_i;
+reg full_fifo_i;
+reg empty_i;
+
+wire led_full_o;
+wire wr_o;
+wire rd_o;
+wire en_fir_o;
+
+
+reg [11:0] coef_in;
+reg cambio_coef_i;
+
+wire [11:0] coef0 ;
+wire [11:0] coef1 ;
+wire [11:0] coef2 ;
+wire [11:0] coef3 ;
+wire [11:0] coef4 ;
+wire [11:0] coef5 ;
+wire [11:0] coef6 ;
+wire [11:0] coef7 ;
+wire [11:0] coef8 ;
+wire [11:0] coef9 ;
+wire [11:0] coef10;
+wire [11:0] coef11;
+wire [11:0] coef12;
+wire [11:0] coef13;
+wire [11:0] coef14;
+wire [11:0] coef15;
+
+block_coef_control(
+.clk_100MHz_i(clk_100MHz_i),
+.rst_i(rst_i),
+.pulsador_carga_coef_i(pulsador_carga_coef_i),
+.send_i(send_i),
+.full_fifo_i(full_fifo_i),
+.empty_i(empty_i),
+.led_full_o(led_full_o),
+.wr_o(wr_o),
+.rd_o(rd_o),
+.en_fir_o(en_fir_o),
+
+.coef_in(coef_in),
+.cambio_coef_i(cambio_coef_i),
+.coef0(coef0 ),
+.coef1(coef1 ),
+.coef2(coef2 ),
+.coef3(coef3 ),
+.coef4(coef4 ),
+.coef5(coef5 ),
+.coef6(coef6 ),
+.coef7(coef7 ),
+.coef8(coef8 ),
+.coef9(coef9 ),
+.coef10(coef10),
+.coef11(coef11),
+.coef12(coef12),
+.coef13(coef13),
+.coef14(coef14),
+.coef15(coef15)
+);
+
+
+initial begin
+    //RESET GENERAL
+        clk_100MHz=0;
+        rst=1;
+        
+        pulsador_carga_coef_i=0;
+        send_i=0;        
+        full_fifo_i=0;
+        empty_i=0;
+        
+        coef_in= -  12'd99; ;
+        cambio_coef_i=0;
+    #1380
+        rst=0;
+        pulsador_carga_coef_i=1;        
+    #`Tbit;
+    //CARGA DE COEFICIENTES
+                                     //Coef 0
+        pulsador_carga_coef_i=0;
+        cambio_coef_i=1;
+    #`Tbit;
+        cambio_coef_i=0;        
+    #`Tbit;
+        coef_in= 12'd65;        //Coef 1
+        cambio_coef_i=1;                  
+    #`Tbit;
+        cambio_coef_i=0;
+    #`Tbit;
+        coef_in= 12'd136;       //Coef 2
+        cambio_coef_i=1;                  
+    #`Tbit;
+        cambio_coef_i=0;
+    #`Tbit;
+        coef_in= 12'd33;        //Coef 3
+        cambio_coef_i=1;                  
+    #`Tbit;
+        cambio_coef_i=0;
+    #`Tbit;
+        coef_in= -  12'd156;    //Coef 4
+        cambio_coef_i=1;                  
+    #`Tbit;
+        cambio_coef_i=0;
+    #`Tbit;
+        coef_in= -  12'd86;     //Coef 5
+        cambio_coef_i=1;                  
+    #`Tbit;
+        cambio_coef_i=0;        
+    #`Tbit;
+        coef_in= 12'd376;       //Coef 6
+        cambio_coef_i=1;                  
+    #`Tbit;
+        cambio_coef_i=0;
+    #`Tbit;
+        coef_in= 12'd854;       //Coef 7
+        cambio_coef_i=1;                  
+    #`Tbit;
+        cambio_coef_i=0;
+    #`Tbit;          
+        coef_in= 12'd854;       //Coef 8
+        cambio_coef_i=1;                  
+    #`Tbit;
+        cambio_coef_i=0;
+    #`Tbit;
+        coef_in=12'd376;        //Coef 9
+        cambio_coef_i=1;                  
+    #`Tbit;
+        cambio_coef_i=0;
+    #`Tbit;
+        coef_in= - 12'd86;        //Coef 10
+        cambio_coef_i=1;                  
+    #`Tbit;
+        cambio_coef_i=0;
+    #`Tbit;
+        coef_in= -  12'd156;        //Coef 11
+        cambio_coef_i=1;                  
+    #`Tbit;
+        cambio_coef_i=0;
+    #`Tbit;
+        coef_in= 12'd33;        //Coef 12
+        cambio_coef_i=1;                  
+    #`Tbit;  
+        cambio_coef_i=0;
+    #`Tbit;
+        coef_in= 12'd136;        //Coef 13
+        cambio_coef_i=1;                  
+    #`Tbit;
+        cambio_coef_i=0;
+    #`Tbit;      
+        coef_in= 12'd65;        //Coef 14
+        cambio_coef_i=1;                  
+    #`Tbit;
+        cambio_coef_i=0;
+    #`Tbit;      
+        coef_in=-  12'd99;        //Coef 15
+        cambio_coef_i=1;                  
+    #`Tbit;
+    #`Tbit;    
+        
+$finish;
+
+
+
+.data_adc_fir_int(data_adc_fir_int),
+.ready_int(ready_int),
+.data_fir_mem_int(data_fir_mem_int)
+
+    always @(negedge clk_78MHz)begin
+        if (rst || !en_fir_i) begin
+            count_sample=0;
+            full = 0;
+            resS=27'b0;
+            resT=0;
+            
+            m   =0;
+            m1  =0;
+            m2  =0;
+            m3  =0;
+            m4  =0;
+            m5  =0;
+            m6  =0;
+            m7  =0;
+            m8  =0;
+            m9  =0;
+            m10 =0;
+            m11 =0;
+            m12 =0;
+            m13 =0;
+            m14 =0;
+            m15 =0;
+            
+            resp   =0;
+            resp1  =0;
+            resp2  =0;
+            resp3  =0;
+            resp4  =0;
+            resp5  =0;
+            resp6  =0;
+            resp7  =0;
+            resp8  =0;
+            resp9  =0;
+            resp10 =0;
+            resp11 =0;
+            resp12 =0;
+            resp13 =0;
+            resp14 =0;
+            resp15 =0;
+            
+        end else begin
+            if (en_fir_i) begin
+                if(ready_i)begin
+                    m   = data_in;
+                    m1  =m;
+                    m2  =m1;
+                    m3  =m2;
+                    m4  =m3;
+                    m5  =m4;
+                    m6  =m5;
+                    m7  =m6;
+                    m8  =m7;
+                    m9  =m8;
+                    m10 =m9;
+                    m11 =m10;
+                    m12 =m11;
+                    m13 =m12;
+                    m14 =m13;
+                    m15 =m14;  
+                    count_sample =  (count_sample + 1) ;
+                    full =  (count_sample < 15) ? 0 : 1 ;          
+                end
+                if (full) begin
+                    resp   = coef0   * m ;
+                    resp1  = coef1   * m1;
+                    resp2  = coef2   * m2;
+                    resp3  = coef3   * m3;
+                    resp4  = coef4   * m4;
+                    resp5  = coef5   * m5;
+                    resp6  = coef6   * m6;
+                    resp7  = coef7   * m7;
+                    resp8  = coef8   * m8;
+                    resp9  = coef9   * m9;
+                    resp10 = coef10 * m10;
+                    resp11 = coef11 * m11;
+                    resp12 = coef12 * m12;
+                    resp13 = coef13 * m13;
+                    resp14 = coef14 * m14;
+                    resp15 = coef15 * m15;
+                    resS   = resp + resp1 + resp2 + resp3 + resp4 + resp5 + resp6 + resp7 + resp8 +resp9 + resp10 + resp11 + resp12 + resp13 + resp14 + resp15;
+                    resT   = resS[27:11];
+                end    
+            end
+        end
+    end
+
+endmodule
