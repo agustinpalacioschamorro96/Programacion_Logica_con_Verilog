@@ -837,3 +837,16 @@ $finish;
     end
 
 endmodule
+
+reg clk_78MHz_i;
+reg reset_i;
+
+wire [15:0] data_o;
+wire ready_o;
+
+ADC(
+    .clk_78MHz_i(clk_78MHz_i),
+    .reset_i(reset_i),
+    .data_o(data_o),
+    .ready_o(ready_o)
+);
