@@ -3,7 +3,7 @@
 module ADC(
     input clk_78MHz_i,
     input reset_i,
-    output [15:0] data_o,
+    output [11:0] data_o,
     output ready_o    
 );
 
@@ -34,7 +34,9 @@ xadc_wiz_0 instXADC (
 
 
 //Sacamos para mirar el clock del ADC, el locked del MMCM y dato convertido (data) 
-assign data_o =   data;   
+wire [11:0] adc_data_out;
+assign adc_data_out = data/16;
+assign data_o =   adc_data_out;   
 assign ready_o = ready;   
 
 
