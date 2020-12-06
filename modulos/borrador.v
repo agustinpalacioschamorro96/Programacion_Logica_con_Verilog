@@ -850,3 +850,104 @@ ADC(
     .data_o(data_o),
     .ready_o(ready_o)
 );
+
+
+wire wr_en_int;
+wire rd_en_int;
+wire rd_en_int;
+wire 
+wire 
+wire 
+wire 
+
+.clk(clk),
+.rst(rst),
+.dato_in(dato_in),
+.wr_en(wr_en_int),
+.rd_en(rd_en_int),
+.dato_out(dato_out_int),
+.full(full_int),
+.empty(empty_int)
+
+`timescale 1ns / 1ps
+module control_v2(
+    input clk_i,
+    input rst_i,
+    input pulsador_carga_coef_i,   // pulsador : hablilitar escritura en la UART 
+    input send_i,    // pulsador : inicia la transmision de datos a la PC                  
+    input full_fifo_i,    // proveniente de la FIFO : indica que esta llena    
+    input empty_i,   // proveniente de la FIFO : indica que esta vacia
+    
+    input fin_block_coef_i, // Ya se cargaron todos los coeficientes 
+    //input c_listo_i,     // proveniente de 8a12 : p/contar los coeficientes
+    input ready_i,         // proveniente del ADC
+    input full_fir_reg_i,  // proveniente del FIR : indica que se llenaron los registros.
+
+    output en_recepcion_o, // habilita el almacenamiento de coeficientes(8_12 y block_coef)
+    output full_o,         // enciende un LED del kit p/indicar memoria llena
+    
+    output en_uart_o,// habilita escritura y transmision en la UART
+    output wr_o,     // habilita la escritura de la FIFO
+    output rd_o,     // habilita la lectura de la FIFO    
+    output en_fir_o  // habilita el filtro FIR
+    );
+    
+    // Recepcion
+    reg enable;
+    reg en_rx;      assign en_recepcion_o = en_rx;
+    reg en_fir;     assign en_fir_o =en_fir;
+    // FIFO
+    reg write;      assign wr_o   = write;
+    reg read;       assign rd_o   = read;
+    reg led;        assign full_o = led;
+    reg take_data; // almacenar dato (filtrado)
+    
+    always @(posedge clk_i) begin
+        if (rst_i) begin
+            enable =0;
+            led    =0;
+            en_fir =0;
+            en_rx  =0;
+            write  =0;
+            read   =0;
+
+            take_data=0;
+         // habilitar recepcion
+         end if (pulsador_carga_coef_i) begin
+            enable =1;
+            en_rx  =(enable)? 1 : 0;
+         // cuando se ingresen los 16 coeficientes deshabilitar el coeff, 8a12 y habilitar el filtro FIR
+         end if (fin_block_coef_i) begin 
+             enable =0;
+             en_fir=1;
+         // si los registros del FIR estan llenos entonces se habilitan/deshabilita la escritura/lectura de la FIFO
+         end if (full_fir_reg_i) begin             
+                if (ready_i) begin // /Â¨Â¨Â¨1Â¨Â¨Â¨0Â¨Â¨/_____ /Â¨Â¨Â¨1Â¨Â¨Â¨Â¨0Â¨Â¨/
+                    take_data=!take_data;
+                // si full_fifo_i (FIFO) no esta llena entonces se habilita la escritura de la FIFO
+                end if (!full_fifo_i && take_data) begin
+                    write =1;
+                    read  =0;
+                    led   =0;                 
+                // si full_fifo_i esta llena se deshabilita la escritura de la FIFO y deshabilita FIR
+                end if (full_fifo_i) begin
+                    write =0;
+                    read  =0;
+                    led   =1; // puede salir de la FIFO
+                    en_fir=0;
+                // si se pulsa send_i mientras la memoria esta llena -> se activa la lectura y se apaga el led
+                end if (full_fifo_i && send_i) begin
+                    write =0;
+                    read  =1;
+                    led   =0;
+                // si se pulsa send_i mientras la memoria esta vacia -> se activa la escritura y el filtro FIR
+                end if (empty_i && send_i) begin
+                    write =1;
+                    read  =0;
+                    en_fir=1;
+                end
+         end
+    
+    end
+
+endmodule
