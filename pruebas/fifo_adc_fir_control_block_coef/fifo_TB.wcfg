@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="filtro_TB_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="filtro_TB" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="94513758000fs"></ZoomStartTime>
+      <ZoomEndTime time="95279758001fs"></ZoomEndTime>
+      <Cursor1Time time="95041758000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="200"></NameColumnWidth>
+      <ValueColumnWidth column_width="66"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="25" />
+   <wvobject fp_name="/filtro_TB/clk_100MHz" type="logic">
+      <obj_property name="ElementShortName">clk_100MHz</obj_property>
+      <obj_property name="ObjectShortName">clk_100MHz</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/rst" type="logic">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/led_full_o" type="logic">
+      <obj_property name="ElementShortName">led_full_o</obj_property>
+      <obj_property name="ObjectShortName">led_full_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/coef_in" type="array">
+      <obj_property name="ElementShortName">coef_in[11:0]</obj_property>
+      <obj_property name="ObjectShortName">coef_in[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/pulsador_carga_coef_i" type="logic">
+      <obj_property name="ElementShortName">pulsador_carga_coef_i</obj_property>
+      <obj_property name="ObjectShortName">pulsador_carga_coef_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/cambio_coef_i" type="logic">
+      <obj_property name="ElementShortName">cambio_coef_i</obj_property>
+      <obj_property name="ObjectShortName">cambio_coef_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/dato_out_int" type="array">
+      <obj_property name="ElementShortName">dato_out_int[15:0]</obj_property>
+      <obj_property name="ObjectShortName">dato_out_int[15:0]</obj_property>
+      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
+      <obj_property name="CellHeight">100</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT4/data_fir_o" type="array">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">data_fir_o[15:0]</obj_property>
+      <obj_property name="ObjectShortName">data_fir_o[15:0]</obj_property>
+      <obj_property name="label">SALIDA FIR</obj_property>
+      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
+      <obj_property name="CellHeight">100</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT5/data_o" type="array">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">data_o[11:0]</obj_property>
+      <obj_property name="ObjectShortName">data_o[11:0]</obj_property>
+      <obj_property name="label">SALIDA ADC</obj_property>
+      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
+      <obj_property name="CellHeight">100</obj_property>
+      <obj_property name="AnalogYRangeType">ANALOG_YRANGETYPE_FIXED</obj_property>
+      <obj_property name="AnalogYRangeMin">1.84467e+19</obj_property>
+      <obj_property name="AnalogYRRangeMax">0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT5/clk_78MHz_i" type="logic">
+      <obj_property name="ElementShortName">clk_78MHz_i</obj_property>
+      <obj_property name="ObjectShortName">clk_78MHz_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT5/ready_o" type="logic">
+      <obj_property name="ElementShortName">ready_o</obj_property>
+      <obj_property name="ObjectShortName">ready_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT6/wr_aux" type="logic">
+      <obj_property name="ElementShortName">wr_aux</obj_property>
+      <obj_property name="ObjectShortName">wr_aux</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT2/wr_o" type="logic">
+      <obj_property name="ElementShortName">wr_o</obj_property>
+      <obj_property name="ObjectShortName">wr_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT2/pulsador_carga_coef_i" type="logic">
+      <obj_property name="ElementShortName">pulsador_carga_coef_i</obj_property>
+      <obj_property name="ObjectShortName">pulsador_carga_coef_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT2/en_recepcion_o" type="logic">
+      <obj_property name="ElementShortName">en_recepcion_o</obj_property>
+      <obj_property name="ObjectShortName">en_recepcion_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT2/fin_block_coef_i" type="logic">
+      <obj_property name="ElementShortName">fin_block_coef_i</obj_property>
+      <obj_property name="ObjectShortName">fin_block_coef_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT2/en_fir_o" type="logic">
+      <obj_property name="ElementShortName">en_fir_o</obj_property>
+      <obj_property name="ObjectShortName">en_fir_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT2/full_fir_reg_i" type="logic">
+      <obj_property name="ElementShortName">full_fir_reg_i</obj_property>
+      <obj_property name="ObjectShortName">full_fir_reg_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT6/empty_o" type="logic">
+      <obj_property name="ElementShortName">empty_o</obj_property>
+      <obj_property name="ObjectShortName">empty_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/send_i" type="logic">
+      <obj_property name="ElementShortName">send_i</obj_property>
+      <obj_property name="ObjectShortName">send_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT6/full_o" type="logic">
+      <obj_property name="ElementShortName">full_o</obj_property>
+      <obj_property name="ObjectShortName">full_o</obj_property>
+      <obj_property name="CustomSignalColor">#FF0080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT2/rd_o" type="logic">
+      <obj_property name="ElementShortName">rd_o</obj_property>
+      <obj_property name="ObjectShortName">rd_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT2/led_full_o" type="logic">
+      <obj_property name="ElementShortName">led_full_o</obj_property>
+      <obj_property name="ObjectShortName">led_full_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT1/clk_read" type="logic">
+      <obj_property name="ElementShortName">clk_read</obj_property>
+      <obj_property name="ObjectShortName">clk_read</obj_property>
+   </wvobject>
+   <wvobject fp_name="/filtro_TB/SUT/SUT1/clk_uart_o" type="logic">
+      <obj_property name="ElementShortName">clk_uart_o</obj_property>
+      <obj_property name="ObjectShortName">clk_uart_o</obj_property>
+   </wvobject>
+</wave_config>

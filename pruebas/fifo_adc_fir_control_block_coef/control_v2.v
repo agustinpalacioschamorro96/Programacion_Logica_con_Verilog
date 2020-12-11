@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 module control_v2(
     input clk_i,
     input rst_i,    
@@ -22,6 +23,7 @@ module control_v2(
     reg write;
     reg read;
     reg led;
+    reg proceso_envio;
 
     // FIFO
     assign wr_o   = write;
@@ -40,34 +42,36 @@ module control_v2(
             led    =0;
             en_fir_aux =0;
             en_recepcion  =0;
+            proceso_envio = 0;
          // habilitar recepcion
         end else begin
             if (pulsador_carga_coef_i) begin
                 enable_recepcion_aux =1;
                 en_fir_aux=0;
-                en_recepcion  =(enable_recepcion_aux)? 1 : 0;
+                en_recepcion  = 1 ;
             // cuando se ingresen los 16 coeficientes deshabilitar el coeff, 8a12 y habilitar el filtro FIR
             end if (fin_block_coef_i) begin 
-                enable_recepcion_aux =0;
+                en_recepcion = 0;
                 en_fir_aux=1;
-            // si full_i no esta llena se habilita la escritura 
-            end if (full_fir_reg_i && !full_fifo_i) begin
+            // si la fifo no esta llena, los registros del fir están completos y no se está enviando nada, se habilita la escritura 
+            end if (full_fir_reg_i && !full_fifo_i && !proceso_envio) begin
                 write =1;
                 read  =0;
                 led   =0;                 
             // si full_i esta llena se deshabilita la escritura de la FIFO y deshabilita FIR
             end if (full_fifo_i) begin                
                 write =0;
-                read  =0;
-                led   =1; // puede salir de la FIFO
                 en_fir_aux=0;
+                led   =1; // puede salir de la FIFO
             // si se pulsa send_i mientras la memoria esta llena -> se activa la lectura y se apaga el led
-            end if (full_fifo_i && send_i) begin
+            end if (send_i && full_fifo_i) begin
+                proceso_envio=1;
                 write =0;
                 read  =1;
                 led   =0;
             // si se pulsa send_i mientras la memoria esta vacia -> se activa la escritura y el filtro FIR
-            end if (empty_i && send_i) begin
+            end if (empty_i && send_i && fin_block_coef_i) begin
+                proceso_envio=0;
                 write =1;
                 read  =0;
                 en_fir_aux=1;

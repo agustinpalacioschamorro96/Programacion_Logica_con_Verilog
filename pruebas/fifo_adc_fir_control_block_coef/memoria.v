@@ -9,17 +9,15 @@ module memoria(
     input ready_i,
     output [15:0] dato_o,
     output full_o,
-    output empty_o,
-    output clk_inv
+    output empty_o
  );
  
- assign clk_inv = !clk_i;
  
  reg wr_aux;
  wire [15:0] dato_fifo;
  //fifo 1024x16 real
  //fifo 16x16 pruebas
- fifo S1 (
+fifo_generator_0 S1 (
    .clk(clk_i),      // input wire clk
    .srst(rst_i),    // input wire srst
    .din(dato_in_i),      // input wire [15 : 0] din

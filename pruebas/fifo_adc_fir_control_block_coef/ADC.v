@@ -11,7 +11,7 @@ module ADC(
 wire [15:0] data; 
 wire ready;    
 
-xadc_wiz_0 instXADC (
+xadc_wiz_0 device (
 .di_in(16'h0),              // input wire [15 : 0] di_in
 .daddr_in(7'h16),      // input wire [6 : 0] daddr_in, colocamos la direcci?n del statua register 0x16 que corresponde a VAUXP[6] 
 .den_in(eoc),            // input wire den_in
